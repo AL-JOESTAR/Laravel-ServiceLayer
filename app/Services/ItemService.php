@@ -6,24 +6,15 @@ use App\Models\Item;
 
 class ItemService
 {
-    Public function getall(){
-        return Item::get();
-    }
+    public function store(array $data){
+        $pajak = 2500;
 
-       public function create(array $data)
-    {
+        $data['price'] = $this->tax($data['price'], $pajak);
+
         return Item::create($data);
     }
 
-    public function update(Item $item, array $data)
-    {
-        $item->update($data);
-
-        return $item;
-    }
-
-    public function delete(Item $item)
-    {
-        return $item->delete();
+    public function tax($price, $tax){
+        return $price + $tax;
     }
 }
